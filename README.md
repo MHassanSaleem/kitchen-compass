@@ -1,2 +1,2 @@
-# kitche-compass
+# kitchen-compass
  
