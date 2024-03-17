@@ -18,16 +18,18 @@ function Popular() {
   }
 
   return (
-    <div>
+    <div className="m-2">
+      <h3 className="text-red-400">Popular</h3>
       {popular.map((recipe) => {
-        return(
-          <div key={recipe.id}>
-            <p>{recipe.title}</p>
-          </div>
-        );
+          return(
+            <div key={recipe.id} >
+              <p>{recipe.title}</p>
+              <img src={recipe.image} alt={recipe.title} />
+            </div>
+          );
       })}
     </div>
-  )
+  );
 }
 
 export default Popular
