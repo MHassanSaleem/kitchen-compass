@@ -1,9 +1,13 @@
-import Home from "./pages/Home";
+import Pages from "./pages/Pages";
+import Header from "./components/Header";
+import Category from "./components/Category";
 
 function App() {
   return (
     <div className="App">
-      <Home/>
+      <Header/>
+      <Category/>
+      <Pages/>
     </div>
   );
 }
