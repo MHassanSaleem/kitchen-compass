@@ -2,47 +2,40 @@ import { useEffect, useState } from "react";
 
 function Vegetarian() {
   const [vegetarian, setVegetarian] = useState([]);
-  useEffect(()=>{
-    getvegetarian();
-  },[])
 
-  //fetching recipes from spoonacular
-  const getvegetarian = async () =>{
-    //checking if data is already in the storage before fetching everytime
+  useEffect(() => {
+    getVegetarian();
+  }, []);
+
+  const getVegetarian = async () => {
     const checkStorage = localStorage.getItem('vegetarian');
-    if(checkStorage){
-      setVegetarian(JSON.parse(checkStorage)); // from string to array
-    } else{
+    if (checkStorage) {
+      setVegetarian(JSON.parse(checkStorage));
+    } else {
       const api = await fetch(
-        `https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}&number=1&tags=vegetarian`
-        );
-    const data= await api.json();
-    //storing in local storage
-    localStorage.setItem("vegetarian", JSON.stringify(data.recipes)); //from array to string
-    setVegetarian(data.recipes);
+        `https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}&number=8&tags=vegetarian`
+      );
+      const data = await api.json();
+      localStorage.setItem("vegetarian", JSON.stringify(data.recipes));
+      setVegetarian(data.recipes);
     }
   };
 
   return (
-    <div className="p-10">
-      <h3 className="text-red-400">Vegetarian</h3>
-      <div className="flex flex-wrap justify-center">
-        {vegetarian.map((recipe) => {
-            return(
-              <div key={recipe.id} class="w-screen md:w-1/4 lg:w-1/5 rounded-lg p-1 m-1 hover:-translate-y-1 duration-500 shadow-md hover:shadow-red-300 hover:shadow-md shadow-sky-300 ">
-                <div class="flex relative">
-                  <img src={recipe.image} class="absolute inset-0 rounded-lg w-full h-full object-cover object-center opacity-90"/>
-                  <div class="px-8 py-16 relative z-10 w-full bg-white opacity-0 hover:opacity-100 duration-300">
-                    <h1 class="text-lg font-medium text-sky-800 mb-3">{recipe.title}</h1>
-                  </div>
-                </div>
-              </div>
-            );
-        })}
-
+    <div className="container mx-auto p-10">
+      <h3 className="text-2xl font-semibold text-red-400 mb-6">Vegetarian</h3>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {vegetarian.map((recipe) => (
+          <div key={recipe.id} className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300">
+            <img src={recipe.image} alt={recipe.title} className="w-full h-48 object-cover" />
+            <div className="p-4">
+              <h2 className="text-lg font-semibold text-gray-800 mb-2">{recipe.title}</h2>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
 }
 
-export default Vegetarian
+export default Vegetarian;
