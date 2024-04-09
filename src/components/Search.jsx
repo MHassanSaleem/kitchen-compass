@@ -9,6 +9,7 @@ function Search() {
     const searchHandler = (e) => {
         e.preventDefault();
         navigate("/searched/" + query);
+        setQuery(""); // Clear the input field after search
     };
 
     return (

@@ -22,10 +22,10 @@ function Recipe() {
         <div className="md:w-1/2">
           <img src={details.image} alt={details.title} className="w-full h-auto rounded-lg mb-4" />
           <div className="flex justify-center space-x-4">
-            <span className="px-2 py-1 bg-green-500 text-white rounded-lg">{details.vegetarian && 'Vegetarian'}</span>
-            <span className="px-2 py-1 bg-blue-500 text-white rounded-lg">{details.vegan && 'Vegan'}</span>
-            <span className="px-2 py-1 bg-yellow-500 text-white rounded-lg">{details.glutenFree && 'Gluten Free'}</span>
-            <span className="px-2 py-1 bg-red-500 text-white rounded-lg">{details.dairyFree && 'Dairy Free'}</span>
+            {details.vegetarian && <span className="px-2 py-1 bg-green-500 text-white rounded-lg">Vegetarian</span>}
+            {details.vegan && <span className="px-2 py-1 bg-blue-500 text-white rounded-lg">Vegan</span>}
+            {details.glutenFree && <span className="px-2 py-1 bg-yellow-500 text-white rounded-lg">Gluten Free</span>}
+            {details.dairyFree && <span className="px-2 py-1 bg-red-500 text-white rounded-lg">Dairy Free</span>}
           </div>
         </div>
         <div className="md:w-1/2 md:pl-8">
@@ -33,13 +33,14 @@ function Recipe() {
           <p className="text-lg mb-4" dangerouslySetInnerHTML={{__html: details.summary}}></p>
           <h3 className="text-xl font-bold mb-2">Ingredients</h3>
           <ul>
-            {details.extendedIngredients.map((ingredients) => <li>{ingredients.original}</li>)}
+            {details.extendedIngredients && details.extendedIngredients.map((ingredient) => (
+                <li key={ingredient.id}>{ingredient.original}</li>
+            ))}
           </ul>
           <h3 className="text-xl font-bold mb-2">Instructions</h3>
-          <p className="text-lg mb-4" dangerouslySetInnerHTML={{__html: details.instructions}}></p>
-          <div className="mt-8">
-            <a href={details.sourceUrl} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">View Full Recipe</a>
-          </div>
+          <ol className="list-decimal">
+            <p className="text-lg mb-4" dangerouslySetInnerHTML={{__html: details.instructions}}></p>
+          </ol>
         </div>
       </div>
     </div>
