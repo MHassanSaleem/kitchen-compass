@@ -3,11 +3,10 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ##### installed #####
-framer-motion
 react-icons
 react-router-dom
 tailwind CSS
-splideJS
+
 
 ## Available Scripts
 
